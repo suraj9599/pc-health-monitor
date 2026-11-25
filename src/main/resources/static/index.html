@@ -1,0 +1,345 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PC Health Monitor | Dashboard</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon">PC</div>
+            <div>
+                <h2>PC Monitor</h2>
+                <span>System Health</span>
+            </div>
+        </div>
+
+        <nav class="navigation">
+            <a href="#" class="nav-link active">
+                <span>▦</span> Dashboard
+            </a>
+
+            <a href="#system-info" class="nav-link">
+                <span>▣</span> System Information
+            </a>
+
+            <a href="#network" class="nav-link">
+                <span>⌁</span> Network
+            </a>
+
+            <a href="#performance" class="nav-link">
+                <span>⌁</span> Performance
+            </a>
+            <a href="#alerts" class="nav-link">
+                <span>⚠</span> Alerts
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <span class="status-dot"></span>
+            Monitoring Active
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <h1>System Dashboard</h1>
+                <p>Monitor your computer's health and performance.</p>
+            </div>
+
+            <div class="topbar-right">
+                <span id="connection-status">Connecting...</span>
+                <div class="profile-icon">PC</div>
+            </div>
+        </header>
+
+        <!-- Overview -->
+        <section class="section">
+            <div class="section-heading">
+                <div>
+                    <h2>System Overview</h2>
+                    <p>Real-time hardware performance</p>
+                </div>
+
+                <span id="last-updated">Waiting for data...</span>
+            </div>
+
+            <div class="metrics-grid">
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span>CPU Usage</span>
+                        <span class="metric-icon">⌘</span>
+                    </div>
+                    <h3 id="cpu-value">--%</h3>
+                    <div class="progress-track">
+                        <div id="cpu-progress" class="progress-fill"></div>
+                    </div>
+                    <span id="cpu-status" class="metric-status">Loading</span>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span>RAM Usage</span>
+                        <span class="metric-icon">▤</span>
+                    </div>
+                    <h3 id="ram-value">--%</h3>
+                    <div class="progress-track">
+                        <div id="ram-progress" class="progress-fill"></div>
+                    </div>
+                    <span id="ram-status" class="metric-status">Loading</span>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span>Disk Usage</span>
+                        <span class="metric-icon">▣</span>
+                    </div>
+                    <h3 id="disk-value">--%</h3>
+                    <div class="progress-track">
+                        <div id="disk-progress" class="progress-fill"></div>
+                    </div>
+                    <span id="disk-status" class="metric-status">Loading</span>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span>Overall Health</span>
+                        <span class="metric-icon">♥</span>
+                    </div>
+                    <h3 id="overall-status">--</h3>
+                    <p>Current system condition</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Detailed Metrics -->
+        <section class="section">
+            <div class="section-heading">
+                <div>
+                    <h2>Resource Details</h2>
+                    <p>Memory and storage information</p>
+                </div>
+            </div>
+
+            <div class="details-grid">
+                <div class="detail-card">
+                    <h3>Memory Details</h3>
+                    <p>RAM Used: <strong id="ram-used">-- GB</strong></p>
+                    <p>RAM Available: <strong id="ram-available">-- GB</strong></p>
+                </div>
+
+                <div class="detail-card">
+                    <h3>Storage Details</h3>
+                    <p>Disk Free: <strong id="disk-free">-- GB</strong></p>
+                    <p>Disk Usage: <strong id="disk-detail-usage">--%</strong></p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Historical Performance -->
+        <section class="section" id="performance">
+            <div class="section-heading">
+                <div>
+                    <h2>Performance History</h2>
+                    <p>Historical CPU, RAM and disk usage</p>
+                </div>
+
+                <select id="chart-range" class="chart-range">
+                    <option value="1">Last 1 Hour</option>
+                    <option value="6">Last 6 Hours</option>
+                    <option value="24" selected>Last 24 Hours</option>
+                    <option value="168">Last 7 Days</option>
+                </select>
+                <button id="export-metrics-btn" class="export-button">
+                    ↓ Export Metrics
+                </button>
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-header">
+                    <h3>Resource Usage Trends</h3>
+                    <span>Usage (%)</span>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="performance-chart"></canvas>
+                </div>
+
+                <p id="chart-message" class="chart-message">
+                    Loading historical data...
+                </p>
+            </div>
+        </section>
+
+
+        <!-- Network Traffic History -->
+        <section class="section" id="network-traffic">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Network Traffic Analysis</h2>
+                    <p>Download and upload speed over time</p>
+                </div>
+            </div>
+
+            <div class="network-speed-grid">
+
+                <div class="speed-card">
+                    <span>Download Speed</span>
+                    <h3 id="download-speed">-- Mbps</h3>
+                    <p>Incoming network traffic</p>
+                </div>
+
+                <div class="speed-card">
+                    <span>Upload Speed</span>
+                    <h3 id="upload-speed">-- Mbps</h3>
+                    <p>Outgoing network traffic</p>
+                </div>
+
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-header">
+                    <h3>Network Speed History</h3>
+                    <span>Speed (Mbps)</span>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="network-chart"></canvas>
+                </div>
+
+                <p id="network-chart-message" class="chart-message">
+                    Loading network history...
+                </p>
+            </div>
+
+        </section>
+
+
+        <!-- Network -->
+        <section class="section" id="network">
+            <div class="section-heading">
+                <div>
+                    <h2>Network Monitoring</h2>
+                    <p>Network adapter information</p>
+                </div>
+            </div>
+
+            <div id="network-container" class="network-grid">
+                <p>Loading network information...</p>
+            </div>
+        </section>
+
+        <!-- System Information -->
+        <section class="section" id="system-info">
+            <div class="section-heading">
+                <div>
+                    <h2>System Information</h2>
+                    <p>Computer hardware and operating system</p>
+                </div>
+            </div>
+
+            <div id="system-info-container" class="detail-card">
+                Loading system information...
+            </div>
+        </section>
+
+
+        <!-- Alert Management -->
+        <section class="section" id="alerts">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Alert Management</h2>
+                    <p>Monitor and manage system health alerts</p>
+                </div>
+            </div>
+
+            <!-- Alert Filters -->
+            <div class="alert-filters">
+
+                <div class="filter-group">
+                    <label for="alert-metric-filter">Component</label>
+
+                    <select id="alert-metric-filter">
+                        <option value="">All Components</option>
+                        <option value="CPU">CPU</option>
+                        <option value="RAM">RAM</option>
+                        <option value="DISK">Disk</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="alert-status-filter">Alert Status</label>
+
+                    <select id="alert-status-filter">
+                        <option value="">All Statuses</option>
+                        <option value="WARNING">Warning</option>
+                        <option value="CRITICAL">Critical</option>
+                        <option value="RECOVERED">Recovered</option>
+                    </select>
+                </div>
+
+                <button id="apply-alert-filters" class="filter-button">
+                    Apply Filters
+                </button>
+
+                <button id="reset-alert-filters" class="reset-button">
+                    Reset
+                </button>
+
+            </div>
+
+            <!-- Alert Results -->
+            <div class="detail-card">
+
+                <div class="alert-results-header">
+                    <h3>Alert History</h3>
+
+                    <div class="alert-header-actions">
+                        <span id="alert-count">Loading...</span>
+
+                        <button id="export-alerts-btn" class="export-button">
+                            ↓ Export Alerts
+                        </button>
+                    </div>
+                </div>
+
+                <div id="alerts-container">
+                    Loading alerts...
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <footer class="footer">
+            PC Health Monitoring Tool · Built with Java and Spring Boot
+        </footer>
+
+    </main>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/js/dashboard.js"></script>
+
+</body>
+</html>
