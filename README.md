@@ -98,7 +98,7 @@ Before running the application, install:
 ### 1. Clone the repository
 
 ```bash
-git clone YOUR_GITHUB_REPOSITORY_URL
+git clone https://github.com/suraj9599/pc-health-monitor.git
 ```
 
 Navigate to the project directory:
