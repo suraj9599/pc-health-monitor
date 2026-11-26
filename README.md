@@ -185,24 +185,21 @@ monitoring.cleanup-cron=0 0 2 * * *
 | Data retention | 30 days | Keeps historical metrics |
 | Cleanup schedule | 2:00 AM daily | Removes expired metrics |
 
+
 ## Screenshots
 
-Add screenshots of your running application here to help visitors understand the dashboard.
+### Main Dashboard
+![PC Health Monitor Dashboard](screenshots/dashboard.PNG)
 
-Suggested screenshots:
+### Performance Charts
+![Performance Charts](screenshots/performance-charts.PNG)
 
-- Main dashboard
-- CPU, RAM, and disk monitoring
-- Historical performance charts
-- Network traffic monitoring
-- Alert management and filters
-- CSV export results
+### Network Monitoring
+![Network Monitoring](screenshots/network-monitoring.PNG)
 
-For example, save your screenshots in a folder named `screenshots` and embed them like this:
+### Alert Management
+![Alert Management](screenshots/alert-management.PNG)
 
-```markdown
-[//]: # (![PC Health Monitor Dashboard]&#40;screenshots/dashboard.png&#41;)
-```
 
 ## Future Enhancements
 
